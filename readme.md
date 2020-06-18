@@ -1,10 +1,13 @@
 Dev Analytcs
 ==========
 
+![Dev-Analytics-1](https://user-images.githubusercontent.com/5710734/85045011-ae8a6800-b18e-11ea-829d-d7d770e2aec2.png)
+
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 
 ## What is Dev Analytics?
-Dev Analytics is a WordPress plugin that integrate the [analtytics embed API](https://developers.google.com/analytics/devguides/reporting/embed/v1) 
+Dev Analytics is a WordPress plugin that integrate the 
+[analytics embed API](https://developers.google.com/analytics/devguides/reporting/embed/v1) 
 in your WordPress Dashboard.
 
 ### To whom it is addressed?
