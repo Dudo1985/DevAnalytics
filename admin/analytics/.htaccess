@@ -1,0 +1,6 @@
+#disallow access via browser of the json key
+
+<Files "YOURFILENAME.json">
+ Order allow,deny
+    Deny from all
+</Files>
