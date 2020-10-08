@@ -17,37 +17,47 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 
-if ( ! defined('ABSPATH') ) {
+if (!defined('ABSPATH')) {
     exit('You\'re not allowed to see this page');
 } // Exit if accessed directly
 
+if (!class_exists('DevAnalytics_AdminPage')) {
+    class DevAnalytics_AdminPage {
 
-class DevAnalytics_AdminPage {
-
-    public static function action() {
-        add_action('admin_menu', array( 'DevAnalytics_AdminPage', 'devanalyticsAddMenuPage'));
-    }
-
-    public static function devanalyticsAddMenuPage () {
-        //Add Settings Page
-        add_menu_page(
-            __('Analytics', 'devanalytics'), //Page Title
-            __('DevAnalytics', 'devanalytics'), //Menu Title
-            'manage_options', //capability
-            'devanalytics_settings_page', //menu slug
-            array(
-                'DevAnalytics_AdminPage',
-                'devanalytics_analytics_page_callback'
-            ), //The function to be called to output the content for this page.
-            'dashicons-chart-line'
-        );
-    }
-
-    // Settings Page Content
-    public static function devanalytics_analytics_page_callback() {
-        if ( ! current_user_can('manage_options') ) {
-            wp_die(__('you don\'t have enough privileges to see this page.', 'devanalytics'));
+        public function action() {
+            add_action('admin_menu', array($this, 'devanalyticsAddMenuPage'));
         }
-        include(DEVANALYTICS_ABSOLUTE_PATH . '/admin/analytics/devanalytics_analytics.php');
-    } //End yasr_settings_page_content
+
+        public function devanalyticsAddMenuPage() {
+            //Add Settings Page
+            add_menu_page(
+                __('Analytics', 'devanalytics'), //Page Title
+                __('DevAnalytics', 'devanalytics'), //Menu Title
+                'manage_options', //capability
+                'devanalytics_settings_page', //menu slug
+                [
+                    'DevAnalytics_AdminPage',
+                    'devanalytics_analytics_page_callback',
+                ],
+                //The function to be called to output the content for this page.
+                'dashicons-chart-line'
+            );
+        }
+
+        // Settings Page Content
+        public static function devanalytics_analytics_page_callback() {
+            if (!current_user_can('manage_options')) {
+                wp_die(
+                    __(
+                        'you don\'t have enough privileges to see this page.',
+                        'devanalytics'
+                    )
+                );
+            }
+            include(DEVANALYTICS_ABSOLUTE_PATH
+                . '/admin/analytics/devanalytics_analytics.php');
+        } //End yasr_settings_page_content
+
+    }
+
 }

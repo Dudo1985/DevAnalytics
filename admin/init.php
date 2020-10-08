@@ -17,30 +17,40 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 
-if ( ! defined('ABSPATH') ) {
+if (!defined('ABSPATH')) {
     exit('You\'re not allowed to see this page');
 } // Exit if accessed directly
 
-if(!is_admin()) {
+if (!is_admin()) {
     return;
 }
 
 //admin absolute path
-define('DEVANALYTICS_ABSOLUTE_PATH_ADMIN', DEVANALYTICS_ABSOLUTE_PATH . '/admin');
-define('DEVANALYTICS_RELATIVE_PATH_ADMIN', DEVANALYTICS_RELATIVE_PATH . '/admin');
+define(
+    'DEVANALYTICS_ABSOLUTE_PATH_ADMIN', DEVANALYTICS_ABSOLUTE_PATH . '/admin'
+);
+define(
+    'DEVANALYTICS_RELATIVE_PATH_ADMIN', DEVANALYTICS_RELATIVE_PATH . '/admin'
+);
 
 
 //e.g. http://localhost/plugin_development/wp-content/plugins/yet-another-stars-rating/admin/js/
-define('DEVANALYTICS_JS_DIR_ADMIN', plugins_url() . '/' . DEVANALYTICS_RELATIVE_PATH_ADMIN . '/js/');
+define(
+    'DEVANALYTICS_JS_DIR_ADMIN',
+    plugins_url() . '/' . DEVANALYTICS_RELATIVE_PATH_ADMIN . '/js/'
+);
 //CSS directory absolute URL
-define('DEVANALYTICS_CSS_DIR_ADMIN', plugins_url() . '/' . DEVANALYTICS_RELATIVE_PATH_ADMIN . '/css/');
+define(
+    'DEVANALYTICS_CSS_DIR_ADMIN',
+    plugins_url() . '/' . DEVANALYTICS_RELATIVE_PATH_ADMIN . '/css/'
+);
 
 add_action('admin_enqueue_scripts', 'devanalytics_add_admin_scripts');
 
 //$hook contain the current page in the admin side
 function devanalytics_add_admin_scripts($hook) {
 
-    if($hook === 'toplevel_page_devanalytics_settings_page') {
+    if ($hook === 'toplevel_page_devanalytics_settings_page') {
 
         wp_enqueue_style(
             'devanalytics-css',
@@ -69,7 +79,7 @@ function devanalytics_add_admin_scripts($hook) {
         wp_enqueue_script(
             'daterangepicker',
             'https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js',
-            array('jquery', 'moment'),
+            ['jquery', 'moment'],
             DEVANALYTICS_VERSION_NUM,
             true
         );
@@ -91,7 +101,8 @@ function devanalytics_autoload_admin_classes($class) {
     if (0 !== strpos($class, 'DevAnalytics_')) {
         return;
     }
-    $file_name = DEVANALYTICS_ABSOLUTE_PATH_ADMIN .'/classes/' . $class . '.php';
+    $file_name = DEVANALYTICS_ABSOLUTE_PATH_ADMIN . '/classes/' . $class
+        . '.php';
 
     // check if file exists, just to be sure
     if (file_exists($file_name)) {
@@ -102,4 +113,5 @@ function devanalytics_autoload_admin_classes($class) {
 //AutoLoad Yasr Shortcode Classes, only when a object is created
 spl_autoload_register('devanalytics_autoload_admin_classes');
 
-DevAnalytics_AdminPage::action();
+$dev_analytics = new DevAnalytics_AdminPage();
+$dev_analytics->action();
