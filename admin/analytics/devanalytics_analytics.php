@@ -21,7 +21,7 @@ if ( ! defined('ABSPATH') ) {
     exit('You\'re not allowed to see this page');
 } // Exit if accessed directly
 
-//autload composer
+//autoload composer
 require_once DEVANALYTICS_ABSOLUTE_PATH . '/vendor/autoload.php';
 
 //load .env file
@@ -54,7 +54,6 @@ $accesstoken = $accesstoken['access_token'];
 <div class="devanalytics-container-settings">
     <div id="embed-api-auth-container"></div>
     <div id="view-selector"></div>
-
 
     <h2><?php _e('Date Range', 'devanalytics');?></h2>
     <div id="reportrange">

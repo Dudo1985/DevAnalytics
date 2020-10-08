@@ -35,17 +35,17 @@ if (!class_exists('DevAnalytics_AdminPage')) {
                 __('DevAnalytics', 'devanalytics'), //Menu Title
                 'manage_options', //capability
                 'devanalytics_settings_page', //menu slug
-                [
-                    'DevAnalytics_AdminPage',
+                array(
+                    $this,
                     'devanalytics_analytics_page_callback',
-                ],
+                ),
                 //The function to be called to output the content for this page.
                 'dashicons-chart-line'
             );
         }
 
         // Settings Page Content
-        public static function devanalytics_analytics_page_callback() {
+        public function devanalytics_analytics_page_callback() {
             if (!current_user_can('manage_options')) {
                 wp_die(
                     __(
